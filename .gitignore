@@ -1,0 +1,42 @@
+# ==========================================
+# 1. Archivos compilados y caché de Python
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# ==========================================
+# 2. Archivos de configuración y seguridad
+# ==========================================
+# NUNCA se suben contraseñas, tokens ni variables de entorno
+.env
+.env.*
+
+# ==========================================
+# 3. Entornos virtuales
+# ==========================================
+# Si creás un entorno virtual (venv), no se sube a Git
+venv/
+env/
+ENV/
+.venv/
+
+# ==========================================
+# 4. Temporales de Jupyter Notebooks y VS Code
+# ==========================================
+.ipynb_checkpoints/
+.vscode/
+
+# ==========================================
+# 5. Archivos del Sistema Operativo
+# ==========================================
+Thumbs.db
+.DS_Store
+
+# ==========================================
+# 6. Datos locales pesados (Data Hygiene)
+# ==========================================
+# Si tu dataset crudo pesa más de 50MB o tiene datos sensibles,
+# se ignora para no saturar el historial de Git:
+# data/raw/*.csv
