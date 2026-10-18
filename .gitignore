@@ -39,4 +39,4 @@ Thumbs.db
 # ==========================================
 # Si tu dataset crudo pesa más de 50MB o tiene datos sensibles,
 # se ignora para no saturar el historial de Git:
-# data/raw/*.csv
+data/raw/*.csv
