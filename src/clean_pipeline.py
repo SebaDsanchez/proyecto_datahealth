@@ -54,8 +54,13 @@ def ejecutar_pipeline():
     print(
         f"--> Filtrados {filas_antes - filas_despues} registros sin datos nutricionales válidos."
     )
-
+# Generar fecha de consulta clínica (2023-2024) para análisis de Time Intelligence en Power BI
+    import numpy as np
+    np.random.seed(42)
+    fechas_posibles = pd.date_range(start="2023-01-01", end="2024-12-31", freq="D")
+    df_merged["visit_date"] = np.random.choice(fechas_posibles, size=len(df_merged))
     # 7. Exportar el dataset procesado
+    
     df_merged.to_csv(ruta_salida, index=False)
     print(f"\n✅ PIPELINE EXITOSO:")
     print(f" - Filas finales: {df_merged.shape[0]:,}")
