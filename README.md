@@ -11,7 +11,26 @@ By integrating demographic records (`10,175` individuals) with 24-hour dietary r
 ![NHANES EDA Dashboard](data/processed/eda_dashboard.png)
 
 ---
+---
 
+---
+
+## 📈 Interactive Business Intelligence Dashboard (Power BI & DAX)
+![Power BI Clinical Dashboard](data/processed/powerbi_dashboard.png)
+
+### Star Schema & Data Modeling
+The processed dataset (`8,531` patients) feeds directly into a **Power BI Star Schema** model, connecting the central clinical fact table (`Pacientes`) with a dynamic master date dimension (`Calendario`) via a `1:*` (One-to-Many) relationship.
+
+### Key DAX Measures & Calculated Columns
+- **Dynamic Sodium Risk Prevalence (`CALCULATE` & `DIVIDE`)**:
+  ```dax
+  % Exceso Sodio = 
+  VAR PacientesRiesgo = CALCULATE([Total Pacientes], Pacientes[sodium_mg] > 2300)
+  VAR TotalGeneral = [Total Pacientes]
+  RETURN DIVIDE(PacientesRiesgo, TotalGeneral, 0)
+  Time Intelligence YoY Comparison (SAMEPERIODLASTYEAR):Pacientes PY = CALCULATE([Total Pacientes], SAMEPERIODLASTYEAR(Calendario[Date]))
+  Demographic & Socioeconomic Segmentation (SWITCH TRUE):
+Implemented dynamic age-group binning (<18 to 65+) and Poverty Income Ratio (PIR) brackets (Low, Middle, High, and Unreported via ISBLANK).
 ## 🎯 Key Analytical & Clinical Insights
 
 1. **Critical Sodium Overconsumption (`66.1%` Prevalence)**: 
@@ -30,7 +49,8 @@ By integrating demographic records (`10,175` individuals) with 24-hour dietary r
 - **Data Engineering & Wrangling**: `Pandas`, `NumPy` (Relational `INNER JOIN` on `SEQN`, schema reduction from 215 raw columns to 11 core features, null removal, and demographic age-binning).
 - **Data Visualization**: `Matplotlib`, `Seaborn` (2x2 executive subplot grid).
 - **Version Control**: `Git` & `GitHub` (Conventional Commits workflow).
-
+- **SQL Analytics**: `SQLite3` (In-memory relational querying using `CTEs`, `CASE WHEN`, `COALESCE`, and manual pivoting).
+- **Business Intelligence**: `Power BI Desktop` & `DAX` (Star Schema modeling, Time Intelligence `YoY`, and conditional matrix formatting).
 ---
 
 ## 📂 Repository Structure
